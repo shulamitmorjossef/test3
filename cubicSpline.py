@@ -35,28 +35,32 @@ def build_s_printx0(f, x0, n, result):
         s_list[i] = ((f[i+1][1] * (x - f[i][0]))/h_i - (f[i][1] * (x - f[i+1][0])) / h_i
                     + result[i+1] / 6 * (((x - f[i][0]) ** 3)/h_i - h_i * (x - f[i][0]))
                    - result[i] / 6 * (((x - f[i+1][0]) ** 3)/h_i - h_i * (x - f[i+1][0])))
-        print("s" + str(i) + "(x) = " + str(s_list[i]))
+        # print("s" + str(i) + "(x) = " + str(s_list[i]))
 
     if (x0 < f[0][0]):
-        print(
-            "\nx0 smaller than f(x" + str(0) + ") = " + str(f[0][0]) + " so:")
-        print("s" + str(0) + "(" + str(x0) + ") = " + str(float(s_list[0].subs(x, x0))))
+        # print(
+        #     "\nx0 smaller than f(x" + str(0) + ") = " + str(f[0][0]) + " so:")
+        # print("s" + str(0) + "(" + str(x0) + ") = " + str(float(s_list[0].subs(x, x0))))
+        r = float(s_list[0].subs(x, x0))
     else:
         if (x0 > f[n - 1][0]):
-            print(
-                "\nx0 bigger than f(x" + str(n) + ") = " + str(f[n - 1][0]) + " so:")
-            print("s" + str(n - 1) + "(" + str(x0) + ") = " + str(float(s_list[n - 2].subs(x, x0))))
+            # print(
+            #     "\nx0 bigger than f(x" + str(n) + ") = " + str(f[n - 1][0]) + " so:")
+            # print("s" + str(n - 1) + "(" + str(x0) + ") = " + str(float(s_list[n - 2].subs(x, x0))))
+            r = float(s_list[n-2].subs(x, x0))
+
 
         else:
             for i in range(n - 1):
                 if (x0 > f[i][0] and x0 < f[i + 1][0]):
-                    print(
-                        "\nx0 between f(x" + str(i + 1) + ") = " + str(f[i][0]) + " and f(x" + str(
-                            i + 2) + ") = " + str(
-                            f[i + 1][0]) + " so:")
-                    print("s" + str(i + 1) + "(" + str(x0) + ") = " + str(float(s_list[i].subs(x, x0))))
+                    # print(
+                    #     "\nx0 between f(x" + str(i + 1) + ") = " + str(f[i][0]) + " and f(x" + str(
+                    #         i + 2) + ") = " + str(
+                    #         f[i + 1][0]) + " so:")
+                    # print("s" + str(i + 1) + "(" + str(x0) + ") = " + str(float(s_list[i].subs(x, x0))))
+                    r = float(s_list[i].subs(x, x0))
 
-
+    return r
 def natural_cubic_spline(f, x0):
     n = len(f)
     matrix = [[0] * (n + 1) for _ in range(n)]
@@ -75,17 +79,20 @@ def natural_cubic_spline(f, x0):
                 matrix[i][j+1] = 1/6 * h1
         matrix[i][n] = (f[i+1][1] - f[i][1])/h1 - (f[i][1] - f[i-1][1])/h0
 
-    print(np.array(matrix))
+    # print(np.array(matrix))
     result = gaussianElimination(matrix)
-    if isinstance(result, str):
-        print(result)
-    else:
-        print(bcolors.OKBLUE, "\nSolution for the system:")
-        for x1 in result:
-            print("{:.6f}".format(x1))
+    # if isinstance(result, str):
+    #     print(result)
+    # else:
+        # print(bcolors.OKBLUE, "\nSolution for the system:")
+        # for x1 in result:
+        #     print("{:.6f}".format(x1))
 
 
-    build_s_printx0(f, x0, n, result)
+    fx = build_s_printx0(f, x0, n, result)
+
+    return fx
+
 def cubic_spline(f, x0, Fx_0, Fx_n):
 
     n = len(f)
@@ -135,7 +142,8 @@ if __name__ == '__main__':
     Fx_0 = 0
     Fx_n = 0
 
-    print("func: " + str(f))
-    print("x0 = " + str(x0) + "\n")
-    natural_cubic_spline(f, x0)
+    # print("func: " + str(f))
+    # print("x0 = " + str(x0) + "\n")
+    fx = natural_cubic_spline(f, x0)
+    print(fx)
 

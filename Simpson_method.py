@@ -24,6 +24,7 @@ def simpsons_rule(f, a, b, n):
         raise ValueError("Number of subintervals (n) must be even for Simpson's Rule.")
 
     h = (b - a) / n
+    # print("{:<10} {:<15} ".format("Iteration", "integral"))
 
     integral = f(a) + f(b)  # Initialize with endpoints
 
@@ -33,6 +34,8 @@ def simpsons_rule(f, a, b, n):
             integral += 2 * f(x_i)
         else:
             integral += 4 * f(x_i)
+        # print(i, "     " , integral)
+
 
     integral *= h / 3
 
@@ -41,7 +44,7 @@ def simpsons_rule(f, a, b, n):
 
 if __name__ == '__main__':
     f = lambda x: math.e ** (x ** 2)
-    n = 10
+    n = 1
     a=0
     b=1
 
