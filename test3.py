@@ -28,7 +28,7 @@ from newtonRaphson import newton_raphson
 from secant_method import secant_method
 from linear_interpolation import linearInterpolation
 from polynomial_interpolation import polynomialInterpolation
-from Trapezoidal_method import trapezoidal_rule
+#from Trapezoidal_method import trapezoidal_rule
 from Trapezoidal_method import calc_trapez
 from Simpson_method import simpsons_rule
 from cubicSpline import natural_cubic_spline
