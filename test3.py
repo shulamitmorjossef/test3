@@ -86,7 +86,7 @@ def output():
     integralT = trapezoidal_rule(f, x1, x2, n1)
     integralT1 = trapezoidal_rule(f, x1, x2, n1+1)
 
-    print("\nCalculate the integral between the points -1.5 and 1.1:")
+    print("\nCalculate the integral between the points", x1, "and", x2, ":")
 
     print("\nApproximate integral in iteration" , n1, ":",  integralT)
     print("Approximate integral in iteration", n1+2, ":",  integralT1)
