@@ -28,8 +28,8 @@ from newtonRaphson import newton_raphson
 from secant_method import secant_method
 from linear_interpolation import linearInterpolation
 from polynomial_interpolation import polynomialInterpolation
-#from Trapezoidal_method import trapezoidal_rule
-from Trapezoidal_method import calc_trapez
+from Trapezoidal_method import trapezoidal_rule
+# from Trapezoidal_method import calc_trapez
 from Simpson_method import simpsons_rule
 from cubicSpline import natural_cubic_spline
 from Romberg_method import romberg_integration
@@ -76,11 +76,17 @@ def output():
     b=f2
 
     f = lambda x: (3 * x ** 2 + math.sin(x ** 4 + 5 * x - 6)) / (2 * math.e ** (-2 * x + 5))
-    x1, x2 = 1.1, -1.5
+    x1, x2 = -1.5, 1.1
+
+    # print("\nx1 = ", x1)
+    # print("x2 = ", x2)
+
     n1 = 120
 
-    integralT =  trapezoidal_rule(f, x1, x2, n1)
+    integralT = trapezoidal_rule(f, x1, x2, n1)
     integralT1 = trapezoidal_rule(f, x1, x2, n1+1)
+
+    print("\nCalculate the integral between the points -1.5 and 1.1:")
 
     print("\nApproximate integral in iteration" , n1, ":",  integralT)
     print("Approximate integral in iteration", n1+2, ":",  integralT1)
